@@ -10,6 +10,23 @@ const pool = new Pool({
     database: env.DATABASE_NAME
 });
 
+export async function getMovies(limit, offset) {
+    try {
+        const result = await pool.query(
+            'CALL get_movies($1, $2, null, null)',
+            [limit, offset]
+        );
+
+        return {
+            movies: result.rows[0].movies,
+            has_more: result.rows[0].has_more
+        }
+    } catch (error) {
+        console.error('Error fetching movies:', error);
+        throw new GenricDatabaseError('Database error while fetching movies');
+    }
+}
+
 export async function getRequests() {
     try {
         const result = await pool.query('CALL get_requests(null)');
