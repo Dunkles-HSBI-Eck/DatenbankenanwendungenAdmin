@@ -17,4 +17,6 @@
         </li>
     </ol>
 </div>
-{@render children()}
+<div class="py-2 px-4">
+    {@render children()}
+</div>

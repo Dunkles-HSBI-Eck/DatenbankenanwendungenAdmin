@@ -34,5 +34,8 @@
 		"onlyBuiltDependencies": [
 			"esbuild"
 		]
+	},
+	"dependencies": {
+		"pg": "^8.16.2"
 	}
 }
