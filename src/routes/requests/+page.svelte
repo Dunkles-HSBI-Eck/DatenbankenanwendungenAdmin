@@ -8,7 +8,7 @@
         {
             if(data.requests[i].id == id)
             {
-                
+                //TODO: remove request from DB
                 data.requests.splice(i, i+1);
                 req.splice(i,i+1);
                 break;

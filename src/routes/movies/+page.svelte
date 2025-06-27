@@ -8,6 +8,7 @@
             <img src="/api/v1/images/covers/{movie.cover}" alt="">
             <div>
                 <h2 class="text-xl font-bold">{movie.title}</h2>
+                <p>id: {movie.id}</p>
                 <p class="text-gray-700">Release Date: {new Date(movie.release).toLocaleDateString()}</p>
             </div>
         </div>
