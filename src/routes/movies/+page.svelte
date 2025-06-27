@@ -10,6 +10,7 @@
                 <h2 class="text-xl font-bold">{movie.title}</h2>
                 <p>id: {movie.id}</p>
                 <p class="text-gray-700">Release Date: {new Date(movie.release).toLocaleDateString()}</p>
+                <a href="/movie/{movie.id}"><div class="bg-blue-600 w-fit rounded items-center text-center text-amber-50"><p>details</p></div></a>
             </div>
         </div>
     {/each}
