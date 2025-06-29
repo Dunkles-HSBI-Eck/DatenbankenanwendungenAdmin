@@ -18,4 +18,7 @@
     {#if data.movies.length === 0}
         <p class="text-gray-500">No movies found.</p>
     {/if}
+
+    
 </div>
+<a href="/createMovie"><div class="rounded bg-blue-600 text-amber-50 text-sm m-5 p-5 max-w-40">add a movie</div></a>
