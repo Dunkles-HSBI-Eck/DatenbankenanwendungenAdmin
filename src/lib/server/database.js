@@ -60,3 +60,17 @@ export async function getPriceTiers() {
     }
 }
 
+export async function updateRequest(id, status) {
+    console.log("db.js funct", id, status);
+    try {
+        const result = await pool.query(
+            'CALL update_request_status($1, $2)',
+            [id, status]
+        );
+        console.log(result);
+        return result;
+    } catch (error) {
+        console.error('Error updating requests:', error);
+        throw new GenricDatabaseError('Database error while updating requests');
+    }
+}
