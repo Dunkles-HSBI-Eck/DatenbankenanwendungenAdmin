@@ -5,6 +5,7 @@
 
     let { data } = $props();
     let title = $state();
+    let originalTitle = $state();
     let description = $state();
     let price = $state(); //price tier id
     let coverFile = null;
@@ -54,9 +55,9 @@
 
     function submit()
     {
-      console.log(title);
-        if(title == null){ submitFail("title not defined"); return};
-        if(description == null){ submitFail("description not defined"); return};
+        if(title == null || title == ''){ submitFail("title not defined"); return};
+        if(originalTitle == null || originalTitle == ''){ submitFail("original title not defined"); return};
+        if(description == null || description == ''){ submitFail("description not defined"); return};
         if(price == null){ submitFail("price not defined"); return};
         if(coverFile == null){ submitFail("no cover file uploaded"); return};
         if(bannerFile == null){ submitFail("no banner file uploaded"); return};
@@ -73,15 +74,21 @@
       goto("/movies");
     }
 
-    onMount(() => console.log(data));
-
 </script>
-<p>{data.tiers[0].price}</p>
 <div class="m-10 flex-col">
     <div class="">
         <label class="label">
           <span class="label-text">Title</span>
           <input class="input" bind:value={title} type="text" placeholder="Enter title here" />
+        </label>
+    </div>
+    <br>
+    <hr class="hr" />
+    <br>
+    <div class="">
+        <label class="label">
+          <span class="label-text">Original Title</span>
+          <input class="input" bind:value={originalTitle} type="text" placeholder="Enter original title here" />
         </label>
     </div>
     <br>

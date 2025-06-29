@@ -4,7 +4,6 @@ import { json, error } from "@sveltejs/kit";
 export async function GET() {
     try {
         const requests = await getPriceTiers();
-        console.log(requests);
         return json(requests.map(request => ({
             id: request.price_tier_id,
             price: request.price
