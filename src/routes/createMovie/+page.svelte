@@ -1,10 +1,12 @@
 <script>
 	import { goto } from '$app/navigation';
     import { FileUpload } from '@skeletonlabs/skeleton-svelte';
+	import { onMount } from 'svelte';
 
+    let { data } = $props();
     let title = $state();
     let description = $state();
-    let price = $state();
+    let price = $state(); //price tier id
     let coverFile = null;
     let bannerFile = null;
     let videoFile = null;
@@ -59,9 +61,6 @@
         if(coverFile == null){ submitFail("no cover file uploaded"); return};
         if(bannerFile == null){ submitFail("no banner file uploaded"); return};
         if(videoFile == null && videoPath == null){ submitFail("no video file uploaded or video path definded"); return};
-        const priceNumber = Number(price);
-        if(isNaN(priceNumber)){submitFail("specified price is not a number"); return};
-        console.log(priceNumber);
         const actorsList= actors.split(';');
         const directorsList= actors.split(';');
         const writersList= actors.split(';');
@@ -74,7 +73,10 @@
       goto("/movies");
     }
 
+    onMount(() => console.log(data));
+
 </script>
+<p>{data.tiers[0].price}</p>
 <div class="m-10 flex-col">
     <div class="">
         <label class="label">
@@ -97,7 +99,12 @@
     <div class="">
         <label class="label">
           <span class="label-text">Price</span>
-          <input class="input text-right" bind:value={price} type="text" placeholder="Enter Price here" />
+          <select class="select" bind:value={price}>
+          {#each data.tiers as tier}
+            <option value={tier.id}>{tier.price}€</option>
+          {/each}
+            
+          </select>
         </label>
     </div>
     <br>

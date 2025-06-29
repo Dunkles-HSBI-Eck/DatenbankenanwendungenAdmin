@@ -49,3 +49,14 @@ export async function getRequests() {
         throw new GenricDatabaseError('Database error while fetching requests');
     }
 }
+
+export async function getPriceTiers() {
+    try {
+        const result = await pool.query('CALL get_price_tiers(null)');
+        return result.rows[0].price_tiers || [];
+    } catch (error) {
+        console.error('Error fetching PriceTiers:', error);
+        throw new GenricDatabaseError('Database error while fetching PriceTiers');
+    }
+}
+
