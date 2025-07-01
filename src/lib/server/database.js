@@ -23,17 +23,14 @@ export async function getMovieById(movie_id) {
 	}
 }
 
-export async function getMovies(limit, offset) {
+export async function getMovies(limit, offset, search = '', order_by = 'id', order = 'asc', genres = []) {
     try {
-        const result = await pool.query(
-            'CALL get_movies($1, $2, null, null)',
-            [limit, offset]
-        );
+        const result = await pool.query('CALL get_movies($1, $2, $3, $4, $5, $6, null, null)', [limit, offset, search, order_by, order, genres]);
 
         return {
             movies: result.rows[0].movies,
             has_more: result.rows[0].has_more
-        }
+        };
     } catch (error) {
         console.error('Error fetching movies:', error);
         throw new GenricDatabaseError('Database error while fetching movies');
