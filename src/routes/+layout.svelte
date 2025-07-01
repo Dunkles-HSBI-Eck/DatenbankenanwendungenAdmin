@@ -4,7 +4,7 @@
 	let { children } = $props();
 </script>
 
-<div class="sticky top-0 left-0 w-full flex justify-center bg-blue-500 h-16">
+<div class="w-full flex justify-center bg-blue-500 h-16">
     <ol class="flex items-center space-x-4">
         <li>
             <a href="/" class="hover:underline">Home</a>
@@ -17,6 +17,6 @@
         </li>
     </ol>
 </div>
-<div class="py-2 px-4">
+<div class="py-4 px-4">
     {@render children()}
 </div>
