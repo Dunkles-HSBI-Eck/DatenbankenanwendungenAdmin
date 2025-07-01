@@ -58,7 +58,6 @@ export async function getPriceTiers() {
 }
 
 export async function updateRequest(id, status) {
-    console.log("db.js funct", id, status);
     try {
         const result = await pool.query(
             'CALL update_request_status($1, $2)',
@@ -69,5 +68,41 @@ export async function updateRequest(id, status) {
     } catch (error) {
         console.error('Error updating requests:', error);
         throw new GenricDatabaseError('Database error while updating requests');
+    }
+}
+
+export async function getLicensesByMovieId(movie_id) {
+    try {
+        const result = await pool.query('CALL get_licenses_by_movie_id($1, null)', [movie_id]);
+        return result.rows[0].licenses || [];
+    } catch (error) {
+        console.error('Error fetching licenses by movie ID:', error);
+        throw new GenricDatabaseError('Database error while fetching licenses by movie ID');
+    }
+}
+
+export async function insertLicenseForMovie(movie_id, count, price, expiration) {
+    try {
+        const result = await pool.query(
+            'CALL insert_license_for_movie($1, $2, $3, $4)',
+            [movie_id, count, price, expiration]
+        );
+        return result;
+    } catch (error) {
+        console.error('Error inserting license for movie:', error);
+        throw new GenricDatabaseError('Database error while inserting license for movie');
+    }
+}
+
+export async function deleteLicenseForMovie(movie_id, price, expiration) {
+    try {
+        const result = await pool.query(
+            'CALL delete_license_for_movie($1, $2, $3)',
+            [movie_id, price, expiration]
+        );
+        return result;
+    } catch (error) {
+        console.error('Error deleting license for movie:', error);
+        throw new GenricDatabaseError('Database error while deleting license for movie');
     }
 }
